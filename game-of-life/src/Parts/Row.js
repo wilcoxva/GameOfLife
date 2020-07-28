@@ -18,4 +18,4 @@ class Row extends React.Component {
     }
 }
 
-export default Game;
+export default Row;

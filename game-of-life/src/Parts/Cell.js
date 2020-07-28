@@ -18,4 +18,4 @@ class Cell extends React.Component {
     }
 }
 
-export default Game;
+export default Cell;
