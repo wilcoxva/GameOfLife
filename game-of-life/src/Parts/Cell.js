@@ -2,18 +2,17 @@ import React from 'react';
 import './Cell.css';
 
 class Cell extends React.Component {
-    constructor() {
-        super();
-    }
+    constructor(props) {
+        super(props);
 
-    state = {
+        this.state = {
+
+        }
     }
 
     render() {
         return (
-            <div>
-                <div class="cell"></div>
-            </div>
+            <div className="deadCell" style={{height:'25px', width:'25px', border: '1px solid azure'}} onClick={this.props.onClick}></div>
         )
     }
 }
