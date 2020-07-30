@@ -23,14 +23,6 @@ class Game extends React.Component {
         }
         return grid;
     }
-
-    // handleClick(e) {
-    //     if (e.target.classList.contains("deadCell")) {
-    //         e.target.className = "aliveCell";
-    //     } else {
-    //         e.target.className = "deadCell";
-    //     }
-    // }
     
     handleToggle(e,x,y) {
         console.log(x,y)
@@ -63,10 +55,10 @@ class Game extends React.Component {
 
     checkBoard() {
         let rows = this.state.grid.length;
-        let newGrid = [...this.state.grid];
+        let newGrid = this.makeGrid(25);
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < rows; j++) {
-                let neighbors = this.checkNeighbors(this.state.grid, i, j);
+                let neighbors = this.checkNeighbors(newGrid, i, j);
                 if (this.state.grid[i][j]) {
                     if (neighbors === 2 || neighbors === 3) {
                         newGrid[i][j] = 1;
@@ -80,15 +72,18 @@ class Game extends React.Component {
                 }
             }
         }
-        // this.setState({grid:newGrid});
+        this.setState({grid: newGrid});
         console.log("newgrid", newGrid)
     }
+
+    // display a count of how many times a button was clicked
+
 
     render() {
         return (
             <div className="game">
                 {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
-                <button onClick={this.checkBoard()}>Press Me</button>
+                <button onClick={this.checkBoard}>Press Me</button>
             </div>
         )
     }
