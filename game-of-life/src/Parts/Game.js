@@ -7,19 +7,9 @@ class Game extends React.Component {
     constructor() {
         super();
         this.state = {
-            // board: this.makeBoard(25),
             grid: this.makeGrid(25),
         }
     }
-
-    // makeBoard(numRows) {
-    //     let i;
-    //     let board = [];
-    //     for (i = 0; i < numRows; i++) {
-    //         board.push(<Row />)
-    //     } console.log(board)
-    //     return board
-    // }
 
     makeGrid(numRows) {
         let i;
@@ -34,36 +24,53 @@ class Game extends React.Component {
         return grid;
     }
 
-    handleClick(e) {
-        if (e.target.classList.contains("deadCell")) {
-            e.target.className = "aliveCell";
-        } else {
-            e.target.className = "deadCell";
-        }
-    }
+    // handleClick(e) {
+    //     if (e.target.classList.contains("deadCell")) {
+    //         e.target.className = "aliveCell";
+    //     } else {
+    //         e.target.className = "deadCell";
+    //     }
+    // }
     
-    handleToggle(x,y) {
+    handleToggle(e,x,y) {
         console.log(x,y)
-        let newGrid = [...this.state.grid]
+        let newGrid = [...this.state.grid];
         if (newGrid[x][y] === 0) {
             newGrid[x][y] = 1;
         } else {
             newGrid[x][y] = 0;
         }
         this.setState({grid: newGrid})
-        console.log(this.state.grid)
     }
 
     // check neighbors
     // start at count = 0
+    checkNeighbors() {
+        let count = 0;
+        let i;
+        let j;
+        let rows = this.state.grid.length
+        for (i = 0; i < rows; i++) {
+            for (j = 0; j < rows; j++) {
+                
+            }
+        }
+        return 
+        
+    }
 
     // check whole array to update the board
+    checkBoard() {
+        // look at a cell and calculate neighbors
+        // decide whether newGrid(x,y) will be alive or dead
+        this.checkNeighbors()
+    }
 
     render() {
         return (
             <div className="game" onClick={this.handleClick}>
-                {/* <h1>{this.state.board.map(row => <div>{row}</div>)}</h1> */}
-        {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell onClick={() => this.handleToggle(x,y) } />)}</Row>)}
+                {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
+                <button onClick={this.checkBoard()}>Play</button>
             </div>
         )
     }
