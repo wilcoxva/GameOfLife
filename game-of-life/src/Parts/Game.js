@@ -34,6 +34,7 @@ class Game extends React.Component {
     
     handleToggle(e,x,y) {
         console.log(x,y)
+        console.log("checkneighbors ", this.checkNeighbors(this.state.grid,x,y))
         let newGrid = [...this.state.grid];
         if (newGrid[x][y] === 0) {
             newGrid[x][y] = 1;
@@ -41,36 +42,53 @@ class Game extends React.Component {
             newGrid[x][y] = 0;
         }
         this.setState({grid: newGrid})
-    }
-
-    // check neighbors
-    // start at count = 0
-    checkNeighbors() {
-        let count = 0;
-        let i;
-        let j;
-        let rows = this.state.grid.length
-        for (i = 0; i < rows; i++) {
-            for (j = 0; j < rows; j++) {
-                
-            }
-        }
-        return 
         
     }
 
-    // check whole array to update the board
+    checkNeighbors(grid, x, y) {
+        let count = 0;
+        const dirs = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
+        for (let i = 0; i < dirs.length; i++) {
+            const dir = dirs[i];
+            let y1 = y + dir[0];
+            let x1 = x + dir[1];
+
+            if (x1 >= 0 && x1 < this.state.grid.length && y1 >= 0 && y1 < this.state.grid.length && grid[x1][y1]) {
+                count++;
+            }
+        }
+        return count;
+        
+    }
+
     checkBoard() {
-        // look at a cell and calculate neighbors
-        // decide whether newGrid(x,y) will be alive or dead
-        this.checkNeighbors()
+        let rows = this.state.grid.length;
+        let newGrid = [...this.state.grid];
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < rows; j++) {
+                let neighbors = this.checkNeighbors(this.state.grid, i, j);
+                if (this.state.grid[i][j]) {
+                    if (neighbors === 2 || neighbors === 3) {
+                        newGrid[i][j] = 1;
+                    } else {
+                        newGrid[i][j] = 0;
+                    }
+                } else {
+                    if (!this.state.grid[i][j] && neighbors === 3) {
+                        newGrid[i][j] = 1;
+                    }
+                }
+            }
+        }
+        // this.setState({grid:newGrid});
+        console.log("newgrid", newGrid)
     }
 
     render() {
         return (
-            <div className="game" onClick={this.handleClick}>
+            <div className="game">
                 {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
-                <button onClick={this.checkBoard()}>Play</button>
+                <button onClick={this.checkBoard()}>Press Me</button>
             </div>
         )
     }
