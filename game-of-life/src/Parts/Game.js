@@ -75,7 +75,7 @@ class Game extends React.Component {
                 }
             }
         }
-        this.setState({grid: newGrid});
+        this.setState({ grid: newGrid });
 
         this.timeoutHandler = window.setTimeout(() => {
             this.runGame();
@@ -101,7 +101,14 @@ class Game extends React.Component {
 
     handleSizeChange = (event) => {
         if (event.target.value < 100) {
-        this.setState({ size: Number(event.target.value), grid: this.makeGrid(Number(event.target.value))});
+            this.setState({ size: event.target.value, grid: this.makeGrid(event.target.value)});
+        } else {
+            return
+        }
+        if (event.target.value === 0) {
+            this.setState({ size: '' })
+        } else {
+            return
         }
     }
 
@@ -113,7 +120,6 @@ class Game extends React.Component {
         return (
             <div className="game">
                 {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
-                Use the up and down arrows to
                 <br />Change board dimensions: <input type="number" value={this.state.size} onChange={this.handleSizeChange} />
                 <br />Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> msec
                 <br />Generation: #{this.state.generation}
