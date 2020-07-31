@@ -8,9 +8,9 @@ class Cell extends React.Component {
 
     render() {
         const color = this.props.color;
-        const className = this.props.alive ? "aliveCell" : "deadCell";
+        const className = this.props.alive ? "aliveCell" : color;
         return (
-            <div className={className} style={{height:'25px', width:'25px', border: '1px solid azure', backgroundColor: color.className }} onClick={this.props.onClick}></div>
+            <div style={{height:'25px', width:'25px', border: '1px solid azure', backgroundColor: className }} onClick={this.props.onClick}></div>
         )
     }
 }
