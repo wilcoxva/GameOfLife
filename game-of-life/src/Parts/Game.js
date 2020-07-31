@@ -6,12 +6,18 @@ import Cell from './Cell';
 class Game extends React.Component {
     constructor() {
         super();
+        this.changeBlue = this.changeBlue.bind(this);
+        this.changeRed = this.changeRed.bind(this);
+        this.changeGreen = this.changeGreen.bind(this);
+        this.changeBlack = this.changeBlack.bind(this);
+        this.runGenerations = this.runGenerations.bind(this);
         this.state = {
             grid: this.makeGrid(25),
             isRunning: false,
             interval: 100,
             generation: 0,
             size: 25,
+            color: 'black',
         }
     }
 
@@ -76,6 +82,7 @@ class Game extends React.Component {
             }
         }
         this.setState({ grid: newGrid });
+        this.setState({ generation: this.state.generation += 1 })
 
         this.timeoutHandler = window.setTimeout(() => {
             this.runGame();
@@ -113,17 +120,64 @@ class Game extends React.Component {
     }
 
     handleClear = () => {
-        this.state.grid = this.makeGrid(25);
+        this.setState({ grid: this.makeGrid(25)});
+        this.setState({ generation: 0 })
+    }
+
+    generationSteps() {
+        let rows = this.state.grid.length;
+        let newGrid = this.makeGrid(25);
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < rows; j++) {
+                let neighbors = this.checkNeighbors(this.state.grid, i, j);
+                if (this.state.grid[i][j]) {
+                    if (neighbors === 2 || neighbors === 3) {
+                        newGrid[i][j] = 1;
+                    } else {
+                        newGrid[i][j] = 0;
+                    }
+                } else {
+                    if (!this.state.grid[i][j] && neighbors === 3) {
+                        newGrid[i][j] = 1;
+                    } else {
+                        newGrid[i][j] = 0;
+                    }
+                }
+            }
+        }
+        this.setState({ grid: newGrid });
+        this.setState({ generation: this.state.generation += 1 })
+    }
+
+    runGenerations() {
+        this.generationSteps();
+    }
+
+    changeBlue() {
+        this.setState({ color: 'blue' })
+    }
+
+    changeRed() {
+        this.setState({ color: 'red' })
+    }
+
+    changeGreen() {
+        this.setState({ color: 'green' })
+    }
+
+    changeBlack() {
+        this.setState({ color: 'black' })
     }
 
     render() {
         return (
             <div className="game">
-                {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
+                {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell color={this.state.color} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
                 <br />Change board dimensions: <input type="number" value={this.state.size} onChange={this.handleSizeChange} />
                 <br />Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> msec
                 <br />Generation: #{this.state.generation}
-                <br />Step through each generation manually <button>Click Me</button>
+                <br />Step through each generation manually <button onClick={this.runGenerations}>Click Me</button>
+                <br />Choose your cell color: <button onClick={this.changeBlue}>Blue</button><button onClick={this.changeRed}>Red</button><button onClick={this.changeGreen}>Green</button><button onClick={this.changeBlack}>Black</button>
                 <br />{this.state.isRunning ?
                     <button className="button" onClick={this.stopGame}>Stop</button> :
                     <button className="button" onClick={this.runGame}>Run</button>
