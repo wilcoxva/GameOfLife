@@ -10,6 +10,8 @@ class Game extends React.Component {
             grid: this.makeGrid(25),
             isRunning: false,
             interval: 100,
+            generation: 0,
+            size: 25,
         }
     }
 
@@ -93,15 +95,34 @@ class Game extends React.Component {
         }
     }
 
+    handleIntervalChange = (event) => {
+        this.setState({ interval: event.target.value });
+    }
+
+    handleSizeChange = (event) => {
+        if (event.target.value < 100) {
+        this.setState({ size: Number(event.target.value), grid: this.makeGrid(Number(event.target.value))});
+        }
+    }
+
+    handleClear = () => {
+        this.state.grid = this.makeGrid(25);
+    }
 
     render() {
         return (
             <div className="game">
                 {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
-                {this.state.isRunning ?
+                Use the up and down arrows to
+                <br />Change board dimensions: <input type="number" value={this.state.size} onChange={this.handleSizeChange} />
+                <br />Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> msec
+                <br />Generation: #{this.state.generation}
+                <br />Step through each generation manually <button>Click Me</button>
+                <br />{this.state.isRunning ?
                     <button className="button" onClick={this.stopGame}>Stop</button> :
                     <button className="button" onClick={this.runGame}>Run</button>
                 }
+                <button className="button" onClick={this.handleClear}>Clear</button>
             </div>
         )
     }
