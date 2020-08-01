@@ -1,5 +1,6 @@
 import React from 'react';
 import './Cell.css';
+import classNames from 'classnames';
 
 class Cell extends React.Component {
     constructor(props) {
@@ -7,10 +8,10 @@ class Cell extends React.Component {
     }
 
     render() {
-        const color = this.props.color;
-        const className = this.props.alive ? "aliveCell" : color;
+        const isRunning = this.props.isRunning ? "disableCell" : "";
+        const className = this.props.alive ? "aliveCell" : "deadCell";
         return (
-            <div style={{height:'25px', width:'25px', border: '1px solid azure', backgroundColor: className }} onClick={this.props.onClick}></div>
+            <div className={[isRunning, className].join(" ")} style={{height:'25px', width:'25px', border: '1px solid azure' }} onClick={this.props.onClick}>{this.props.children}</div>
         )
     }
 }

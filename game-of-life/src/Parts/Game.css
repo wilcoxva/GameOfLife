@@ -1,3 +1,7 @@
 .game {
-    background-color: aqua;
+    background-color: #404040;
+}
+
+.grid {
+    display: inline-block;
 }

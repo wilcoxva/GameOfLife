@@ -6,18 +6,14 @@ import Cell from './Cell';
 class Game extends React.Component {
     constructor() {
         super();
-        this.changeBlue = this.changeBlue.bind(this);
-        this.changeRed = this.changeRed.bind(this);
-        this.changeGreen = this.changeGreen.bind(this);
-        this.changeBlack = this.changeBlack.bind(this);
         this.runGenerations = this.runGenerations.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
         this.state = {
             grid: this.makeGrid(25),
             isRunning: false,
             interval: 100,
             generation: 0,
             size: 25,
-            color: 'black',
         }
     }
 
@@ -153,34 +149,25 @@ class Game extends React.Component {
         this.generationSteps();
     }
 
-    changeBlue() {
-        this.setState({ color: 'blue' })
-    }
-
-    changeRed() {
-        this.setState({ color: 'red' })
-    }
-
-    changeGreen() {
-        this.setState({ color: 'green' })
-    }
-
-    changeBlack() {
-        this.setState({ color: 'black' })
-    }
-
     render() {
         return (
             <div className="game">
-                {this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell color={this.state.color} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}
+                <div>
+                    <h1>Conway's Game of Life!</h1>
+                    <p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.</p>
+                    <p>Rules:</p>
+                    <p>Any live cell with two or three live neighbours survives.
+                        Any dead cell with three live neighbours becomes a live cell.
+                        All other live cells die in the next generation. Similarly, all other dead cells stay dead.</p>
+                </div>
+                <div className="grid">{this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}</div>
                 <br />Change board dimensions: <input type="number" value={this.state.size} onChange={this.handleSizeChange} />
                 <br />Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> msec
                 <br />Generation: #{this.state.generation}
                 <br />Step through each generation manually <button onClick={this.runGenerations}>Click Me</button>
-                <br />Choose your cell color: <button onClick={this.changeBlue}>Blue</button><button onClick={this.changeRed}>Red</button><button onClick={this.changeGreen}>Green</button><button onClick={this.changeBlack}>Black</button>
                 <br />{this.state.isRunning ?
-                    <button className="button" onClick={this.stopGame}>Stop</button> :
-                    <button className="button" onClick={this.runGame}>Run</button>
+                    <button onClick={this.stopGame}>Stop</button> :
+                    <button onClick={this.runGame}>Run</button>
                 }
                 <button className="button" onClick={this.handleClear}>Clear</button>
             </div>
