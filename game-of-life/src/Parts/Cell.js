@@ -1,6 +1,5 @@
 import React from 'react';
 import './Cell.css';
-import classNames from 'classnames';
 
 class Cell extends React.Component {
     constructor(props) {
