@@ -1,7 +1,46 @@
+body {
+    background-image: url('787.jpg');
+    background-repeat: repeat;
+    background-size: 100%;
+}
+
+a {
+    font-size: 10px;
+    text-decoration: none;
+    color: black;
+}
+
 .game {
-    background-color: #404040;
+    display: flex;
 }
 
 .grid {
-    display: inline-block;
+    border: 4px solid lightblue;
+    border-radius: 25px;
+    padding: 10px;
+    height: 50%;
+    margin: 7.5%;
+}
+
+.bio {
+    width: 30%;
+    color: black;
+    padding: 5% 10%;
+}
+
+.title {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.controls {
+    background-color: darkgrey;
+    padding: 1%
+}
+
+.controls p {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.controls span {
+    color: lightblue;
 }
