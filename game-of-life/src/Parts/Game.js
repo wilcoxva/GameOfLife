@@ -30,7 +30,7 @@ class Game extends React.Component {
         return grid;
     }
     
-    handleToggle(e,x,y) {
+    handleToggle(x,y) {
         let newGrid = [...this.state.grid];
         if (newGrid[x][y] === 0) {
             newGrid[x][y] = 1;
@@ -52,7 +52,7 @@ class Game extends React.Component {
             if (x1 >= 0 && x1 < this.state.grid.length && y1 >= 0 && y1 < this.state.grid.length && grid[x1][y1]) {
                 count++;
             }
-        }console.log(count)
+        }
         return count;
     }
 
@@ -161,7 +161,7 @@ class Game extends React.Component {
                             Any dead cell with three live neighbours becomes a live cell.
                             All other live cells die in the next generation. Similarly, all other dead cells stay dead.</p>
                     </div>
-                    <div className="grid">{this.state.grid.map((row, x) => <Row>{row.map((cell, y) => <Cell isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(e,x,y) } />)}</Row>)}</div>
+                    <div className="grid">{this.state.grid.map((row, x) => <Row key={x}>{row.map((cell, y) => <Cell key={y} isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(x,y) } />)}</Row>)}</div>
                 </div>
                 <div className="controls">
                     <h3 className="title">Control Panel</h3>
