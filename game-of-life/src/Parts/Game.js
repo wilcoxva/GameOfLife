@@ -9,7 +9,7 @@ class Game extends React.Component {
         let count = 0;
         let media = window.matchMedia('(max-width: 768px)');
         if (media.matches) {
-            count = 10;
+            count = 14;
         } else {
             count = 20;
         }
