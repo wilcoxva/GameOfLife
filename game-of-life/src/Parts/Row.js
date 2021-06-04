@@ -6,7 +6,7 @@ class Row extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            row: this.makeRow(25),
+            row: this.makeRow(props.children.length),
         }
     }
 
