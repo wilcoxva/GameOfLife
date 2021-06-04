@@ -6,14 +6,22 @@ import Cell from './Cell';
 class Game extends React.Component {
     constructor() {
         super();
+        let count = 0;
+        let media = window.matchMedia('(max-width: 768px)');
+        if (media.matches) {
+            count = 10;
+        } else {
+            count = 25;
+        }
         this.runGenerations = this.runGenerations.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
         this.state = {
-            grid: this.makeGrid(25),
+            grid: this.makeGrid(count),
             isRunning: false,
             interval: 100,
             generation: 0,
             size: 25,
+            count: 25,
         }
     }
 

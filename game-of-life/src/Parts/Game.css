@@ -20,6 +20,7 @@ a {
     padding: 10px;
     height: 50%;
     margin: 7.5%;
+    width: fit-content;
 }
 
 .bio {
@@ -43,4 +44,18 @@ a {
 
 .controls span {
     color: lightblue;
+}
+
+@media screen and (max-width: 768px) {
+    .game {
+        display: block;
+    }
+
+    .grid {
+        margin-left: 100px;
+    }
+
+    .bio {
+        width: 80%;
+    }
 }
