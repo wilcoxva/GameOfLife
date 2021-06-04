@@ -179,9 +179,7 @@ class Game extends React.Component {
                             <button onClick={this.runGame}>Run</button>
                         }
                         <button className="button" onClick={this.handleClear}>Clear</button>
-                        <br />
-                        <a href='https://www.freepik.com/photos/background'>Background photo created by denamorado - www.freepik.com</a>
-                    </div>
+                        </div>
                 </div>
                 <div className="grid">{this.state.grid.map((row, x) => <Row key={x}>{row.map((cell, y) => <Cell key={y} isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(x,y) } />)}</Row>)}</div>
             </div>
