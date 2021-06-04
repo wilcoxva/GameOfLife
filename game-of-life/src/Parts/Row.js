@@ -5,7 +5,6 @@ import Cell from './Cell';
 class Row extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             row: this.makeRow(25),
         }
@@ -22,6 +21,7 @@ class Row extends React.Component {
 
     render() {
         const {children} = this.props
+        console.log("children", {children})
         return (
             <div className="row" {...this.props}>{children}</div>
         )

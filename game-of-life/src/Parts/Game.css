@@ -1,13 +1,19 @@
-body {
-    background-image: url('787.jpg');
-    background-repeat: repeat;
-    background-size: 100%;
-}
-
 a {
     font-size: 10px;
     text-decoration: none;
     color: black;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h3 { 
+    font-size: 30px;
+}
+
+p {
+    font-size: 20px;
 }
 
 .game {
@@ -15,22 +21,25 @@ a {
 }
 
 .grid {
-    border: 4px solid lightblue;
-    border-radius: 25px;
-    padding: 10px;
-    height: 50%;
-    margin: 7.5%;
+    margin: auto;
+    padding: 50px;
     width: fit-content;
 }
 
 .bio {
-    width: 30%;
+    width: fit-content;
     color: black;
     margin: auto;
 }
 
 .title {
     font-family: 'Architects Daughter', cursive;
+}
+
+.center {
+    margin: auto;
+    width: auto;
+    padding: 50px;
 }
 
 .controls {
@@ -52,11 +61,22 @@ a {
     }
 
     .grid {
-        margin: auto;
-        width: fit-content;
+        padding: 20px;
     }
 
     .bio {
         width: 80%;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+    
+    h3 { 
+        font-size: 21px;
+    }
+    
+    p {
+        font-size: 16px;
     }
 }

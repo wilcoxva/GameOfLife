@@ -21,7 +21,6 @@ class Game extends React.Component {
             interval: 100,
             generation: 0,
             size: 25,
-            count: 25,
         }
     }
 
@@ -159,8 +158,8 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="game">
+            <div className="game">
+                <div className="center">
                     <div className="bio">
                         <h1 className="title">Conway's Game of Life!</h1>
                         <p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.</p>
@@ -169,22 +168,22 @@ class Game extends React.Component {
                             Any dead cell with three live neighbours becomes a live cell.
                             All other live cells die in the next generation. Similarly, all other dead cells stay dead.</p>
                     </div>
-                    <div className="grid">{this.state.grid.map((row, x) => <Row key={x}>{row.map((cell, y) => <Cell key={y} isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(x,y) } />)}</Row>)}</div>
+                    <div className="controls">
+                        <h3 className="title">Control Panel</h3>
+                        <p>Change board <span>dimensions</span>: <input type="number" value={this.state.size} onChange={this.handleSizeChange} /></p>
+                        <p>Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> <span>msec</span>.</p>
+                        <p><span>Generation</span>: #{this.state.generation}</p>
+                        <p>Step through each generation <span>manually</span>: <button onClick={this.runGenerations}>Click Me</button></p>
+                        {this.state.isRunning ?
+                            <button onClick={this.stopGame}>Stop</button> :
+                            <button onClick={this.runGame}>Run</button>
+                        }
+                        <button className="button" onClick={this.handleClear}>Clear</button>
+                        <br />
+                        <a href='https://www.freepik.com/photos/background'>Background photo created by denamorado - www.freepik.com</a>
+                    </div>
                 </div>
-                <div className="controls">
-                    <h3 className="title">Control Panel</h3>
-                    <p>Change board <span>dimensions</span>: <input type="number" value={this.state.size} onChange={this.handleSizeChange} /></p>
-                    <p>Update every <input value={this.state.interval} onChange={this.handleIntervalChange} /> <span>msec</span>.</p>
-                    <p><span>Generation</span>: #{this.state.generation}</p>
-                    <p>Step through each generation <span>manually</span>: <button onClick={this.runGenerations}>Click Me</button></p>
-                    {this.state.isRunning ?
-                        <button onClick={this.stopGame}>Stop</button> :
-                        <button onClick={this.runGame}>Run</button>
-                    }
-                    <button className="button" onClick={this.handleClear}>Clear</button>
-                    <br />
-                    <a href='https://www.freepik.com/photos/background'>Background photo created by denamorado - www.freepik.com</a>
-                </div>
+                <div className="grid">{this.state.grid.map((row, x) => <Row key={x}>{row.map((cell, y) => <Cell key={y} isRunning={this.state.isRunning} alive={this.state.grid[x][y]} onClick={(e) => this.handleToggle(x,y) } />)}</Row>)}</div>
             </div>
         )
     }
