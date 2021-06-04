@@ -129,7 +129,7 @@ class Game extends React.Component {
 
     generationSteps() {
         let rows = this.state.grid.length;
-        let newGrid = this.makeGrid(25);
+        let newGrid = this.makeGrid(this.state.size);
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < rows; j++) {
                 let neighbors = this.checkNeighbors(this.state.grid, i, j);
