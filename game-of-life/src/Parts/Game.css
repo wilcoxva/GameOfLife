@@ -5,15 +5,15 @@ a {
 }
 
 h1 {
-    font-size: 42px;
-}
-
-h3 { 
     font-size: 30px;
 }
 
+h3 { 
+    font-size: 22px;
+}
+
 p {
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .game {
@@ -22,7 +22,6 @@ p {
 
 .grid {
     margin: auto;
-    padding: 50px;
     width: fit-content;
 }
 
@@ -39,7 +38,7 @@ p {
 .center {
     margin: auto;
     width: auto;
-    padding: 50px;
+    padding: 5px;
 }
 
 .controls {

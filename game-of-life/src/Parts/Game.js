@@ -11,7 +11,7 @@ class Game extends React.Component {
         if (media.matches) {
             count = 10;
         } else {
-            count = 25;
+            count = 20;
         }
         this.runGenerations = this.runGenerations.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
@@ -20,7 +20,7 @@ class Game extends React.Component {
             isRunning: false,
             interval: 100,
             generation: 0,
-            size: 25,
+            size: count,
         }
     }
 
